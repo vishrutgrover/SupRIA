@@ -9,3 +9,8 @@ serpapi
 langchain-groq
 langchain_google_genai
 pandas
+langgraph
+langchain
+sentence-transformers 
+langchain-huggingface
+IPython
