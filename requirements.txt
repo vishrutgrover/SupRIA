@@ -1,0 +1,10 @@
+neo4j
+langchain-community
+langchain-core
+langchain-openai
+langchain-text-splitters
+tiktoken 
+wikipedia
+serpapi
+langchain-groq
+langchain_google_genai
