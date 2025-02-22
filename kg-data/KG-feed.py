@@ -2,10 +2,8 @@ import asyncio
 import os
 from datetime import datetime
 from hashlib import md5
-from typing import List
 from dotenv import load_dotenv
-import pandas as pd
-import seaborn as sns
+from typing import Dict, List
 import tiktoken
 from langchain_community.graphs import Neo4jGraph
 from langchain_core.prompts import ChatPromptTemplate
@@ -13,20 +11,22 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_text_splitters import TokenTextSplitter
 from pydantic import BaseModel, Field
 
+
 load_dotenv()
 
 NEO4J_URI = os.getenv("NEO4J_URI")
 NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 
-graph = Neo4jGraph(uri=NEO4J_URI, username=NEO4J_USERNAME, password=NEO4J_PASSWORD, refresh_schema=False)
+graph = Neo4jGraph(url=NEO4J_URI, 
+                   username=NEO4J_USERNAME, 
+                   password=NEO4J_PASSWORD, 
+                   refresh_schema=False)
 
-graph.query("""
-CREATE CONSTRAINT IF NOT EXISTS FOR (c:Chunk) REQUIRE c.id IS UNIQUE;
-CREATE CONSTRAINT IF NOT EXISTS FOR (c:AtomicFact) REQUIRE c.id IS UNIQUE;
-CREATE CONSTRAINT IF NOT EXISTS FOR (c:KeyElement) REQUIRE c.id IS UNIQUE;
-CREATE CONSTRAINT IF NOT EXISTS FOR (d:Document) REQUIRE d.id IS UNIQUE;
-""")
+graph.query("CREATE CONSTRAINT IF NOT EXISTS FOR (c:Chunk) REQUIRE c.id IS UNIQUE")
+graph.query("CREATE CONSTRAINT IF NOT EXISTS FOR (c:AtomicFact) REQUIRE c.id IS UNIQUE")
+graph.query("CREATE CONSTRAINT IF NOT EXISTS FOR (c:KeyElement) REQUIRE c.id IS UNIQUE")
+graph.query("CREATE CONSTRAINT IF NOT EXISTS FOR (d:Document) REQUIRE d.id IS UNIQUE")
 
 construction_system = """Your role is to extract key elements and atomic facts from a given text.
 1. Key Elements: Essential nouns, verbs, and adjectives pivotal to the text.

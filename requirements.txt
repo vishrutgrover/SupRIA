@@ -8,3 +8,4 @@ wikipedia
 serpapi
 langchain-groq
 langchain_google_genai
+pandas
