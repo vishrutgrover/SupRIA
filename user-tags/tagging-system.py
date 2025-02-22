@@ -27,7 +27,7 @@ def load_user_tags() -> Dict[str, List[str]]:
 
 def save_user_tags(recent: List[str], older: List[str]):
     with open(TAGS_FILE, "w") as file:
-        json.dump({"recent": recent, "older": older}, file)
+        json.dump({"recent": recent, "older": older}, file, indent=4)
 
 tags_data = load_user_tags()
 recent_tags: List[Set[str]] = [set(tags.split(", ")) for tags in tags_data["recent"]]
@@ -47,7 +47,7 @@ def extract_tags(message: str) -> Set[str]:
 
     return tags
 
-def process_message(message: str):
+def process_message(message: str) -> str:
     global recent_tags, older_tags
 
     new_tags = extract_tags(message)
@@ -58,7 +58,7 @@ def process_message(message: str):
     recent_tags.append(new_tags)
     save_user_tags([", ".join(tags) for tags in recent_tags], list(older_tags))
 
-    return f"Recent tags: {recent_tags}\nOlder tags: {older_tags}"
+    return json.dumps({"recent": [list(tags) for tags in recent_tags], "older": list(older_tags)}, indent=4)
 
 if __name__ == "__main__":
     messages = [
