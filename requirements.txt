@@ -14,3 +14,4 @@ langchain
 sentence-transformers 
 langchain-huggingface
 IPython
+spacy
