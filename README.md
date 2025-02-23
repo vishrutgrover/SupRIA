@@ -1,5 +1,5 @@
 ![1731997275507-SBI Banner_2](https://github.com/user-attachments/assets/83029fbb-44e7-47f1-a68e-60b42a70087a)
-# SBI Life Insurance AI Personalization Platform
+# SupRIA (Insurance Policy Recommendation with Personalization Chatbot)
 
 Enhance the customer experience with our AI-driven, real-time personalization platform designed for SBI Life Insurance. Our solution leverages Machine Learning, Knowledge Graphs, and Reinforcement Learning with Human Feedback (RLHF) to deliver dynamic policy recommendations, adjust premiums based on risk, and continuously adapt to evolving customer needs.
 
