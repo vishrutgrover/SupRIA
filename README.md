@@ -110,7 +110,7 @@ user_tags.json
 1. **Clone the Repository:**
 
    ```bash
-   git clone [https://github.com/yourusername/your-repo.git](https://github.com/vishrutgrover/SupRIA.git)
+   git clone https://github.com/vishrutgrover/SupRIA.git
    cd your-repo
    ```
 
