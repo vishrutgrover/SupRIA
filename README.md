@@ -40,29 +40,16 @@ The result is an intelligent system that not only provides smarter, faster, and 
 Below is an overview of the project structure:
 
 ```
-├── Hello
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-310.pyc
-│   │   ├── settings.cpython-310.pyc
-│   │   ├── urls.cpython-310.pyc
-│   │   └── wsgi.cpython-310.pyc
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
+Hello
+├── asgi.py
+├── settings.py
+├── urls.py
+└── wsgi.py
 ├── db.sqlite3
 ├── home
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-310.pyc
-│   │   ├── urls.cpython-310.pyc
-│   │   ├── utils.cpython-310.pyc
-│   │   └── views.cpython-310.pyc
 │   ├── admin.py
 │   ├── apps.py
 │   ├── migrations
-│   │   └── __init__.py
 │   ├── models.py
 │   ├── tests.py
 │   ├── urls.py
