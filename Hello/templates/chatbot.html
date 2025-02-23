@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPRiya</title>
+    <link rel="icon" type="image/png" href="image.png">
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Chat history section */
+        .chat-history {
+            width: 25%;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .chat-history h2 {
+            text-align: center;
+        }
+
+        .history-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #444;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .history-item:hover {
+            background-color: #555;
+        }
+
+        /* Chat area */
+        .chat-container {
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+            background-image: url('{% static "Back.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .chat-header {
+            background-color:rgb(189, 25, 46);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-message {
+            max-width: 60%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+
+        .user-message {
+            background-color: #d1e7ff;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #e6e6e6;
+            align-self: flex-start;
+            text-align: left;
+        }
+
+        /* Chat footer */
+        .chat-footer {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .chat-footer button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .chat-footer button:hover {
+            background-color: darkred;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Chat History Section -->
+<div class="chat-history">
+    <h2>Chat History</h2>
+    <div class="history-item" onclick="loadChat(1)">Conversation 1</div>
+    <div class="history-item" onclick="loadChat(2)">Conversation 2</div>
+    <div class="history-item" onclick="loadChat(3)">Conversation 3</div>
+</div>
+
+<!-- Chatbot Section -->
+<div class="chat-container">
+    <div class="chat-header">SUPRiA</div>
+    <div class="chat-body" id="chatBody">
+        <div class="chat-message bot-message">Hello! How can I assist you today?</div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        let userInput = document.getElementById("userInput");
+        let message = userInput.value.trim();
+        if (message === "") return;
+
+        let chatBody = document.getElementById("chatBody");
+
+        // Append User Message
+        let userMessage = document.createElement("div");
+        userMessage.className = "chat-message user-message";
+        userMessage.textContent = message;
+        chatBody.appendChild(userMessage);
+
+        // Auto Scroll Down
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Clear input
+        userInput.value = "";
+
+        // Simulate Bot Response
+        setTimeout(() => {
+            let botMessage = document.createElement("div");
+            botMessage.className = "chat-message bot-message";
+            botMessage.textContent = getBotResponse(message);
+            chatBody.appendChild(botMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+    }
+
+    function getBotResponse(input) {
+        input = input.toLowerCase();
+    
+        const scenarios = [
+            { keywords: ["thank"], response: "Welcome. Do ask me if you have any further queries. I am here to help you" },
+           
+            // eWealth Plus Scenarios
+            { keywords: ["young professional", "25 years", "income of 5 lakh", "delhi"], response: "As a Young Professional (25 years) in Delhi earning ₹5 lakh annually, we recommend SBI Life eWealth Plus with a premium of ₹50,000/year for 15 years. Maximize equity fund allocation for high returns." },
+            { keywords: ["software engineer", "28 years", "income of 12 lakh", "bangalore"], response: "As a Software Engineer (28 years) in Bangalore with an income of ₹12 lakh, SBI Life eWealth Plus with ₹80,000/year for 12 years is ideal. Focus on equity-heavy investments for growth." },
+            { keywords: ["entrepreneur", "30 years", "income of 10 lakh", "mumbai"], response: "As an Entrepreneur (30 years) in Mumbai earning ₹10 lakh yearly, invest ₹1 lakh/year for 10 years with SBI Life eWealth Plus. Balance risk with 70% equity and 30% debt allocation." },
+            { keywords: ["marketing executive", "27 years", "income of 8 lakh", "hyderabad"], response: "As a Marketing Executive (27 years) in Hyderabad earning ₹8 lakh, SBI Life eWealth Plus with ₹60,000/year for 10 years will grow your wealth through strategic fund allocation." },
+            { keywords: ["analyst", "26 years", "income of 7 lakh", "pune"], response: "As an Analyst (26 years) in Pune earning ₹7 lakh, SBI Life eWealth Plus with ₹55,000/year for 12 years provides high returns with a focus on equity." },
+    
+            // Smart Scholar Plus Scenarios
+            { keywords: ["working parent", "35 years", "income of 9 lakh", "kolkata"], response: "As a Working Parent (35 years) in Kolkata earning ₹9 lakh annually, SBI Life Smart Scholar Plus with ₹75,000/year for 15 years will secure your child’s future." },
+            { keywords: ["teacher", "33 years", "income of 6 lakh", "chennai"], response: "As a Teacher (33 years) in Chennai earning ₹6 lakh yearly, we recommend SBI Life Smart Scholar Plus with a premium of ₹50,000/year for 12 years, ensuring your child's education fund." },
+            { keywords: ["manager", "36 years", "income of 10 lakh", "delhi"], response: "As a Manager (36 years) in Delhi earning ₹10 lakh, SBI Life Smart Scholar Plus with ₹80,000/year for 10 years will build a secure future for your child." },
+            { keywords: ["bank employee", "34 years", "income of 8 lakh", "lucknow"], response: "As a Bank Employee (34 years) in Lucknow earning ₹8 lakh, SBI Life Smart Scholar Plus with ₹60,000/year for 12 years guarantees your child's educational security." },
+            { keywords: ["nurse", "32 years", "income of 5 lakh", "jaipur"], response: "As a Nurse (32 years) in Jaipur earning ₹5 lakh, SBI Life Smart Scholar Plus with ₹40,000/year for 15 years supports your child's academic journey." },
+    
+            // Retire Smart Plus Scenarios
+            { keywords: ["mid-career professional", "35 years", "income of 10 lakh", "bangalore"], response: "As a Mid-Career Professional (35 years) in Bangalore earning ₹10 lakh, SBI Life Retire Smart Plus with ₹1 lakh/year for 15 years will build a solid retirement corpus." },
+            { keywords: ["dual-income couple", "40 years", "income of 12 lakh", "mumbai"], response: "As a Dual-Income Couple (40 years) in Mumbai with a combined income of ₹12 lakh, invest ₹1.2 lakh/year for 10 years in SBI Life Retire Smart Plus for a comfortable retirement." },
+            { keywords: ["civil servant", "38 years", "income of 15 lakh", "delhi"], response: "As a Civil Servant (38 years) in Delhi earning ₹15 lakh, SBI Life Retire Smart Plus with ₹1.5 lakh/year for 12 years ensures a worry-free retirement." },
+            { keywords: ["corporate lawyer", "42 years", "income of 20 lakh", "kolkata"], response: "As a Corporate Lawyer (42 years) in Kolkata earning ₹20 lakh, SBI Life Retire Smart Plus with ₹2 lakh/year for 10 years secures your retirement plans." },
+            { keywords: ["lecturer", "37 years", "income of 8 lakh", "chennai"], response: "As a Lecturer (37 years) in Chennai earning ₹8 lakh, SBI Life Retire Smart Plus with ₹90,000/year for 15 years prepares you for a stable retirement." },
+    
+            // Smart Platina Supreme Scenarios
+            { keywords: ["business owner", "45 years", "income of 20 lakh", "mumbai"], response: "As a Business Owner (45 years) in Mumbai earning ₹20 lakh annually, SBI Life Smart Platina Supreme with ₹2 lakh/year for 10 years offers guaranteed income post-maturity." },
+            { keywords: ["doctor", "48 years", "income of 18 lakh", "delhi"], response: "As a Doctor (48 years) in Delhi earning ₹18 lakh, SBI Life Smart Platina Supreme with ₹1.5 lakh/year for 8 years will secure your long-term financial goals." },
+            { keywords: ["retail owner", "50 years", "income of 12 lakh", "hyderabad"], response: "As a Retail Owner (50 years) in Hyderabad earning ₹12 lakh, SBI Life Smart Platina Supreme with ₹1 lakh/year for 10 years ensures steady income." },
+            { keywords: ["architect", "47 years", "income of 15 lakh", "bangalore"], response: "As an Architect (47 years) in Bangalore earning ₹15 lakh, SBI Life Smart Platina Supreme with ₹1.2 lakh/year for 9 years balances returns and security." },
+            { keywords: ["artist", "49 years", "income of 10 lakh", "pune"], response: "As an Artist (49 years) in Pune earning ₹10 lakh, SBI Life Smart Platina Supreme with ₹80,000/year for 10 years guarantees future financial stability." }
+        ];
+    
+        let bestMatch = null;
+        let maxMatches = 0;
+    
+        for (let scenario of scenarios) {
+            let matches = scenario.keywords.filter(keyword => input.includes(keyword)).length;
+            if (matches > maxMatches) {
+                maxMatches = matches;
+                bestMatch = scenario.response;
+            }
+        }
+    
+        return bestMatch || "I'm here to assist you with SBI Life's insurance plans. Please provide more details like age, income, work sector, and city for personalized suggestions.";
+    }
+    
+    
+    
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+
+    function loadChat(convoNumber) {
+        alert("Loading conversation " + convoNumber);
+    }
+</script>
+
+</body>
+</html>

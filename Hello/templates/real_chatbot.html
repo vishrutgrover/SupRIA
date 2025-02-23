@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPRiya</title>
+    <link rel="icon" type="image/png" href="image.png">
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Chat history section */
+        .chat-history {
+            width: 25%;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .chat-history h2 {
+            text-align: center;
+        }
+
+        .history-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #444;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .history-item:hover {
+            background-color: #555;
+        }
+
+        /* Chat area */
+        .chat-container {
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+            background-image: url('{% static "Back.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .chat-header {
+            background-color: red;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-message {
+            max-width: 60%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+
+        .user-message {
+            background-color: #d1e7ff;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #e6e6e6;
+            align-self: flex-start;
+            text-align: left;
+        }
+
+        /* Chat footer */
+        .chat-footer {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .chat-footer button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .chat-footer button:hover {
+            background-color: darkred;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Chat History Section -->
+<div class="chat-history">
+    <h2>Chat History</h2>
+    <div class="history-item" onclick="loadChat(1)">Conversation 1</div>
+    <div class="history-item" onclick="loadChat(2)">Conversation 2</div>
+    <div class="history-item" onclick="loadChat(3)">Conversation 3</div>
+</div>
+
+<!-- Chatbot Section -->
+<div class="chat-container">
+    <div class="chat-header">SUPRiA :) </div>
+    <div class="chat-body" id="chatBody">
+        <div class="chat-message bot-message">Hello! How can I assist you today?</div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    
+    function sendMessage() {
+        let userInput = document.getElementById("userInput");
+        let message = userInput.value.trim();
+        if (message === "") return;
+
+        let chatBody = document.getElementById("chatBody");
+
+        // Append User Message
+        let userMessage = document.createElement("div");
+        userMessage.className = "chat-message user-message";
+        userMessage.textContent = message;
+        chatBody.appendChild(userMessage);
+
+        // Auto Scroll Down
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Clear input
+        userInput.value = "";
+
+        // Simulate Bot Response
+        setTimeout(() => {
+            let botMessage = document.createElement("div");
+            botMessage.className = "chat-message bot-message";
+            botMessage.textContent = getBotResponse(message);
+            chatBody.appendChild(botMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+    }
+
+    function sendMessage() {
+        let userInput = document.getElementById("userInput");
+        let message = userInput.value.trim();
+        if (message === "") return;
+    
+        let chatBody = document.getElementById("chatBody");
+    
+        // Append User Message
+        let userMessage = document.createElement("div");
+        userMessage.className = "chat-message user-message";
+        userMessage.textContent = message;
+        chatBody.appendChild(userMessage);
+    
+        // Auto Scroll Down
+        chatBody.scrollTop = chatBody.scrollHeight;
+    
+        // Clear input
+        userInput.value = "";
+    
+        // Base cases for instant replies
+        const lowerCaseMessage = message.toLowerCase();
+        const baseReplies = {
+            "hello": "Hello! Welcome to SBI Life's insurance chatbot. How can I assist you today?",
+            "hi": "Hi there! I'm here to help you with SBI Life's policies.",
+            "start": "Let's get started! Ask me anything about SBI Life insurance policies."
+        };
+    
+        if (baseReplies[lowerCaseMessage]) {
+            let botMessage = document.createElement("div");
+            botMessage.className = "chat-message bot-message";
+            botMessage.textContent = baseReplies[lowerCaseMessage];
+            chatBody.appendChild(botMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            return; // Skip Django call for base cases
+        }
+    
+
+        // Fetch bot response from Django for other queries
+        fetch('/chatbot_response/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `question=${encodeURIComponent(message)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            let botMessage = document.createElement("div");
+            botMessage.className = "chat-message bot-message";
+            botMessage.textContent = data.response || "Sorry, I couldn't generate a response.";
+            chatBody.appendChild(botMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        })
+        .catch(error => {
+            console.error('Error fetching bot response:', error);
+        });
+    }
+ 
+    
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+
+    function loadChat(convoNumber) {
+        alert("Loading conversation " + convoNumber);
+    }
+</script>
+
+</body>
+</html>
