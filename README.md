@@ -130,8 +130,15 @@ user_tags.json
 4. **Configure Environment Variables:**
 
    Create a `.env` file in the root directory and add your necessary environment configurations (e.g., secret keys, database settings).
+   The file should contain the following variables:
+   | Variable | Type     | Description                |
+   | :-------- | :------- | :------------------------- |
+   | `GEMINI_API_KEY` | `string` | **Required**. Your Gemini API key |
+   | `NEO4J_URI` | `string` | **Required**. Your Neo4j URI |
+   | `NEO4J_USERNAME` | `string` | **Required**. Your Neo4j DB Username |
+   | `NEO4J_PASSWORD` | `string` | **Required** Your Neo4j DB Password |
 
-5. **Apply Migrations:**
+6. **Apply Migrations:**
 
    ```bash
    python manage.py migrate
