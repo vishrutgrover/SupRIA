@@ -15,3 +15,5 @@ sentence-transformers
 langchain-huggingface
 IPython
 spacy
+django
+torch
