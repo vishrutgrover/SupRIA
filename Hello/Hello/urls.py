@@ -18,8 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from home import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("home.urls"))
+    path("", include("home.urls")),
+    path('', views.index, name='index'),
+    path('about/', views.about, name='about'),
+    path('services/', views.services, name='services'),
+    path('contacts/', views.contacts, name='contacts'),
+    path('chatbot/', views.chatbot, name='chatbot'),
+    path('chatbot_response/', views.chatbot_response, name='chatbot_response'),
+    path('get_conversations/', views.get_conversations, name='get_conversations'),
+    path('get_conversation/<int:conversation_id>/', views.get_conversation, name='get_conversation'),
+    path('delete_conversation/<int:conversation_id>/', views.delete_conversation, name='delete_conversation'),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
