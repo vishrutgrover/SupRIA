@@ -1,7 +1,7 @@
 import google.generativeai as genai
 import json
 
-genai.configure(api_key="AIzaSyBcWbt9c7GhA_TgDR4uJ_cG7C-J-B1Gdu4")
+genai.configure(api_key="api-KEY")
 model = genai.GenerativeModel("gemini-2.0-flash")
 def handle_gemini_response(response):
     try:

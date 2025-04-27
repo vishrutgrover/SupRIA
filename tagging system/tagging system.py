@@ -6,7 +6,7 @@ from collections import Counter
 
 
 nlp = spacy.load("en_core_web_sm")
-genai.configure(api_key="AIzaSyBcWbt9c7GhA_TgDR4uJ_cG7C-J-B1Gdu4")
+genai.configure(api_key="API-KEY")
 model = genai.GenerativeModel("gemini-2.0-flash")
 
 def load_previous_tags(file_path="previous_tags.json"):
