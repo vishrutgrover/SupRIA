@@ -13,7 +13,7 @@ from langchain_core.output_parsers import StrOutputParser
 def is_sbi_life_related(question: str) -> bool:
     prompt = ChatPromptTemplate.from_messages([
         ("system", """You are a helpful assistant that determines if a question is related to SBI Life insurance policies.
-        Return 'yes' if the question is about SBI Life insurance policies, products, services, or related information.
+        Return 'yes' if the question is about SBI Life insurance policies, products, services, or related information, even if it's just about something which can be related to policies.
         Return 'no' if the question is about anything else.
         Be strict in your judgment - only return 'yes' for questions directly related to SBI Life insurance.
         Do not reveal your identity or capabilities. Simply return 'yes' or 'no'."""),
@@ -34,7 +34,8 @@ def ask_question(question: str):
     else:
         prompt = ChatPromptTemplate.from_messages([
             ("system", """You are an SBI Life Insurance Agent. Your role is to help customers with their insurance-related queries.
-            If the question is not related to insurance or SBI Life, politely redirect them to ask insurance-related questions.
+            If the question is not related to insurance or SBI Life, politely redirect them to ask insurance-related questions. 
+            Don't give answer in markdown format.
             Do not reveal your identity as an AI or LLM. Always maintain the persona of an SBI Life Insurance Agent.
             If asked about your identity, simply say you are an SBI Life Insurance Agent and focus on helping with insurance queries."""),
             ("human", "{question}")
