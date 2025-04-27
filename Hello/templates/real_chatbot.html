@@ -13,7 +13,42 @@
         padding: 0;
         background-color: #f2f2f2;
         display: flex;
-        height: 100vh;
+        flex-direction: column; /* Stack navbar and chat vertically */
+        min-height: 100vh;
+      }
+
+      /* Navbar */
+      .navbar-container {
+        background-color: rgb(255, 255, 255);
+        padding: 15px 50px;
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .navbar .logo img {
+        height: 50px;
+      }
+      .navbar a {
+        text-decoration: none;
+        color: rgb(32, 32, 32);
+        font-weight: bold;
+        padding: 10px 20px;
+        transition: all 0.3s ease-in-out;
+      }
+      .navbar a:hover {
+        background-color: rgb(147, 93, 247);
+        border-radius: 5px;
+      }
+
+      /* Wrapper for chat sections */
+      .chat-wrapper {
+        display: flex;
+        flex: 1; /* Take remaining space */
+        height: calc(
+          100vh - 80px
+        ); /* Adjust height considering navbar height */
       }
 
       /* Chat history section */
@@ -47,15 +82,14 @@
         width: 75%;
         display: flex;
         flex-direction: column;
-        min-height: 400px;
         background-image: url("{% static 'Back.jpg' %}?v=3");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        position: relative; /* Needed for overlay */
+        position: relative;
       }
 
-      /* Add this overlay */
+      /* Overlay */
       .chat-container::before {
         content: "";
         position: absolute;
@@ -63,17 +97,11 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(
-          255,
-          255,
-          255,
-          0.8
-        ); /* White overlay, 0.5 = 50% opacity */
+        background: rgba(255, 255, 255, 0.8);
         z-index: 1;
-        pointer-events: none; /* Allows clicks to pass through */
+        pointer-events: none;
       }
 
-      /* Make sure your content is above the overlay */
       .chat-header,
       .chat-body,
       .chat-footer {
@@ -117,7 +145,6 @@
         text-align: left;
       }
 
-      /* Chat footer */
       .chat-footer {
         display: flex;
         padding: 15px;
@@ -149,63 +176,53 @@
     </style>
   </head>
   <body>
-    <!-- Chat History Section -->
-    <div class="chat-history">
-      <h2>Chat History</h2>
-      <div class="history-item" onclick="loadChat(1)">Conversation 1</div>
-      <div class="history-item" onclick="loadChat(2)">Conversation 2</div>
-      <div class="history-item" onclick="loadChat(3)">Conversation 3</div>
+    <!-- Navbar -->
+    <div class="navbar-container">
+      <nav class="navbar">
+        <div class="logo">
+          <img src="{% static 'SBI_New.png' %}" alt="SBI Life Logo" />
+        </div>
+        <div>
+          <a href="/">Home</a>
+          <a href="/about">About Us</a>
+          <a href="/plans">Our Plans</a>
+          <a href="/services">Services</a>
+          <a href="/contact">Contact Us</a>
+        </div>
+      </nav>
     </div>
 
-    <!-- Chatbot Section -->
-    <div class="chat-container">
-      <div class="chat-header">SupRIA</div>
-      <div class="chat-body" id="chatBody">
-        <div class="chat-message bot-message">
-          Hello! How can I assist you today?
-        </div>
+    <!-- Chat Wrapper -->
+    <div class="chat-wrapper">
+      <!-- Chat History -->
+      <div class="chat-history">
+        <h2>Chat History</h2>
+        <div class="history-item" onclick="loadChat(1)">Conversation 1</div>
+        <div class="history-item" onclick="loadChat(2)">Conversation 2</div>
+        <div class="history-item" onclick="loadChat(3)">Conversation 3</div>
       </div>
-      <div class="chat-footer">
-        <input
-          type="text"
-          id="userInput"
-          placeholder="Type a message..."
-          onkeypress="handleKeyPress(event)"
-        />
-        <button onclick="sendMessage()">Send</button>
+
+      <!-- Chatbot Section -->
+      <div class="chat-container">
+        <div class="chat-header">SupRIA</div>
+        <div class="chat-body" id="chatBody">
+          <div class="chat-message bot-message">
+            Hello! How can I assist you today?
+          </div>
+        </div>
+        <div class="chat-footer">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Type a message..."
+            onkeypress="handleKeyPress(event)"
+          />
+          <button onclick="sendMessage()">Send</button>
+        </div>
       </div>
     </div>
 
     <script>
-      function sendMessage() {
-        let userInput = document.getElementById("userInput");
-        let message = userInput.value.trim();
-        if (message === "") return;
-
-        let chatBody = document.getElementById("chatBody");
-
-        // Append User Message
-        let userMessage = document.createElement("div");
-        userMessage.className = "chat-message user-message";
-        userMessage.textContent = message;
-        chatBody.appendChild(userMessage);
-
-        // Auto Scroll Down
-        chatBody.scrollTop = chatBody.scrollHeight;
-
-        // Clear input
-        userInput.value = "";
-
-        // Simulate Bot Response
-        setTimeout(() => {
-          let botMessage = document.createElement("div");
-          botMessage.className = "chat-message bot-message";
-          botMessage.textContent = getBotResponse(message);
-          chatBody.appendChild(botMessage);
-          chatBody.scrollTop = chatBody.scrollHeight;
-        }, 1000);
-      }
-
       function sendMessage() {
         let userInput = document.getElementById("userInput");
         let message = userInput.value.trim();
@@ -241,10 +258,10 @@
           botMessage.textContent = baseReplies[lowerCaseMessage];
           chatBody.appendChild(botMessage);
           chatBody.scrollTop = chatBody.scrollHeight;
-          return; // Skip Django call for base cases
+          return;
         }
 
-        // Fetch bot response from Django for other queries
+        // Fetch bot response from Django
         fetch("/chatbot_response/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
