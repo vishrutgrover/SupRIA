@@ -17,3 +17,6 @@ IPython
 spacy
 django
 torch
+google-generativeai
+django
+fuzzywuzzy
