@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUPRiya</title>
-    <link rel="icon" type="image/png" href="image.png">
+    <title>SupRIA</title>
     {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'image.png' %}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,10 +48,27 @@
             display: flex;
             flex-direction: column;
             min-height: 400px;
-            background-image: url('{% static "Back.jpg" %}');
+            background-image: url("{% static 'Back.jpg' %}?v=3");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+            position: relative; /* Needed for overlay */
+        }
+
+        /* Add this overlay */
+        .chat-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.8); /* White overlay, 0.5 = 50% opacity */
+            z-index: 1;
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+
+        /* Make sure your content is above the overlay */
+        .chat-header, .chat-body, .chat-footer {
+            position: relative;
+            z-index: 2;
         }
 
         .chat-header {
@@ -134,7 +151,7 @@
 
 <!-- Chatbot Section -->
 <div class="chat-container">
-    <div class="chat-header">SUPRiA :) </div>
+    <div class="chat-header">SupRIA</div>
     <div class="chat-body" id="chatBody">
         <div class="chat-message bot-message">Hello! How can I assist you today?</div>
     </div>
