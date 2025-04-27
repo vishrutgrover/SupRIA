@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUPRiya</title>
-    <link rel="icon" type="image/png" href="image.png">
+    <link rel="icon" type="image/png" href="{% static 'image.png' %}">
     {% load static %}
     <style>
         body {
@@ -134,7 +134,7 @@
 
 <!-- Chatbot Section -->
 <div class="chat-container">
-    <div class="chat-header">SUPRiA</div>
+    <div class="chat-header">SupRIA</div>
     <div class="chat-body" id="chatBody">
         <div class="chat-message bot-message">Hello! How can I assist you today?</div>
     </div>
@@ -188,7 +188,7 @@
             { keywords: ["analyst", "26 years", "income of 7 lakh", "pune"], response: "As an Analyst (26 years) in Pune earning ₹7 lakh, SBI Life eWealth Plus with ₹55,000/year for 12 years provides high returns with a focus on equity." },
     
             // Smart Scholar Plus Scenarios
-            { keywords: ["working parent", "35 years", "income of 9 lakh", "kolkata"], response: "As a Working Parent (35 years) in Kolkata earning ₹9 lakh annually, SBI Life Smart Scholar Plus with ₹75,000/year for 15 years will secure your child’s future." },
+            { keywords: ["working parent", "35 years", "income of 9 lakh", "kolkata"], response: "As a Working Parent (35 years) in Kolkata earning ₹9 lakh annually, SBI Life Smart Scholar Plus with ₹75,000/year for 15 years will secure your child's future." },
             { keywords: ["teacher", "33 years", "income of 6 lakh", "chennai"], response: "As a Teacher (33 years) in Chennai earning ₹6 lakh yearly, we recommend SBI Life Smart Scholar Plus with a premium of ₹50,000/year for 12 years, ensuring your child's education fund." },
             { keywords: ["manager", "36 years", "income of 10 lakh", "delhi"], response: "As a Manager (36 years) in Delhi earning ₹10 lakh, SBI Life Smart Scholar Plus with ₹80,000/year for 10 years will build a secure future for your child." },
             { keywords: ["bank employee", "34 years", "income of 8 lakh", "lucknow"], response: "As a Bank Employee (34 years) in Lucknow earning ₹8 lakh, SBI Life Smart Scholar Plus with ₹60,000/year for 12 years guarantees your child's educational security." },

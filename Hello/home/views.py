@@ -28,9 +28,6 @@ def chatbot_response(request):
         return JsonResponse({"error": "No question provided"})
     return JsonResponse({"error": "Invalid request"})
 
-
-
-
 # Create your views here.
 def index(request):
     return render(request, 'new.html')
@@ -43,11 +40,3 @@ def contacts(request):
     return redirect("https://www.sbilife.co.in/en/about-us/contact-us")
 def chatbot(request):
     return render(request, 'real_chatbot.html')
-
-
-
-
-
-
-
-
