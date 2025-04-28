@@ -1,18 +1,19 @@
-import google.generativeai as genai
+import google.genai as genai
 import spacy
 import json
 from fuzzywuzzy import fuzz
 from collections import Counter
+from dotenv import load_dotenv
 
+load_dotenv()
 
 nlp = spacy.load("en_core_web_sm")
-genai.configure(api_key="API-KEY")
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.Client(api_key="API_KEY").models
 
 
 def load_previous_tags(file_path="previous_tags.json"):
     with open(file_path, "r") as file:
-        return json.load(file)
+        return json.loads(str(file.read()))
 
 
 def save_updated_tags(tags, file_path="previous_tags.json"):
@@ -40,7 +41,7 @@ Based on these topics: {', '.join(topics)}, suggest a list of behavior tags with
 The weights should reflect the importance of these tags, with recent topics assigned higher weights (8, 9, 10) and older topics assigned lower weights (5, 6, 7). 
 Provide the tags in snake_case format with their respective weights as a dictionary and dont add any comments."""
 
-    response = model.generate_content(prompt)
+    response = model.generate_content(model="gemini-2.0-flash", contents=prompt)
 
     candidates = response.candidates
     content_text = candidates[0].content.parts[0].text
@@ -91,7 +92,10 @@ def adjust_weights_and_add_new_tags(
     return updated_tags
 
 
-def process_user_queries(user_queries, previous_tags_file="previous_tags.json"):
+def process_user_queries(
+    user_queries,
+    previous_tags_file="D:/RAJ ARYAN/Codec/SupRIA/tagging-system/tagging_system.py",
+):
     previous_tags = load_previous_tags(previous_tags_file)
 
     topics = extract_main_topics(user_queries)
