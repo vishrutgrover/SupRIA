@@ -4,16 +4,24 @@ import json
 from fuzzywuzzy import fuzz
 from collections import Counter
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 nlp = spacy.load("en_core_web_sm")
-model = genai.Client(api_key="API_KEY").models
+model = genai.Client(api_key=GEMINI_API_KEY).models
 
 
-def load_previous_tags(file_path="previous_tags.json"):
+def load_previous_tags(
+    file_path="previous_tags.json",
+):
     with open(file_path, "r") as file:
-        return json.loads(str(file.read()))
+
+        try:
+            return json.load(file)
+        except Exception as e:
+            print("Exception:", e)
 
 
 def save_updated_tags(tags, file_path="previous_tags.json"):
@@ -94,7 +102,7 @@ def adjust_weights_and_add_new_tags(
 
 def process_user_queries(
     user_queries,
-    previous_tags_file="D:/RAJ ARYAN/Codec/SupRIA/tagging-system/tagging_system.py",
+    previous_tags_file=r"D:\RAJ ARYAN\Codec\SupRIA\tagging-system\previous_tags.json",
 ):
     previous_tags = load_previous_tags(previous_tags_file)
 
