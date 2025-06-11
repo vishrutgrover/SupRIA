@@ -2,3 +2,4 @@ venv
 .env
 Hello/*.sqlite3
 __pycache__
+Django-Server
