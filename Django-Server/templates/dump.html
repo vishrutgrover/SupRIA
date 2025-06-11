@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBI UPDATED</title>
+           
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar-container {
+            background-color: white;
+            padding: 15px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo img {
+            height: 40px; /* Adjust size */
+            margin-right: 10px; /* Space between logo and text */
+        }
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: 0.3s ease-in-out;
+        }
+        .navbar a:hover {
+            box-shadow: 0px 0px 10px red;
+            border-radius: 5px;
+        }
+
+        /* Chatbot Button */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: red;
+            color: white;
+            width: 100px;
+            height: 100px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease-in-out;
+        }
+        .chatbot-btn:hover {
+            box-shadow: 0px 0px 25px rgba(255, 0, 0, 1);
+        }
+        .chatbot-btn img {
+            width: 65px;
+            height: 65px;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-container">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ7lZkFLPapSEitdMNUtEC7D7KG8fA2YBYOw&s" alt="SBI Life Logo">
+        </div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
+            <a href="/contacts">Contact</a>
+        </div>
+    </nav>
+</div>
+
+<!-- Chatbot Button -->
+<button class="chatbot-btn" onclick="openChatbot()">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png" alt="Chatbot Icon">
+</button>
+
+<script>
+    function openChatbot() {
+        window.location.href = "/chatbot"; // Redirects to chatbot page
+    }
+</script>
+
+</body>
+</html>

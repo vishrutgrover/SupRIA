@@ -1,2 +1,0 @@
-This is a static file. 
-Display this when called

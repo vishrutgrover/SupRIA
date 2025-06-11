@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBI Life Insurance</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #2d2d2d;
+      }
+      .navbar-container {
+        background-color: rgb(255, 255, 255);
+        padding: 15px 50px;
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .navbar .logo img {
+        height: 50px;
+      }
+      .navbar a {
+        text-decoration: none;
+        color: rgb(32, 32, 32);
+        font-weight: bold;
+        padding: 10px 20px;
+        transition: all 0.3s ease-in-out;
+      }
+      .navbar a:hover {
+        background-color: rgb(147, 93, 247);
+        border-radius: 5px;
+      }
+      .hero-section {
+        background-color: rgb(229, 229, 229);
+        height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+      .hero-section h1 {
+        font-size: 4em;
+        margin-bottom: 10px;
+      }
+      .hero-section p {
+        font-size: 1.5em;
+        max-width: 600px;
+      }
+      .content-section {
+        padding: 80px 50px;
+        text-align: center;
+      }
+      .content-section h2 {
+        font-size: 2.5em;
+        color: rgb(172, 0, 57);
+        margin-bottom: 20px;
+      }
+      .card-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+      .card {
+        background: #f4f4f4;
+        padding: 30px;
+        border-radius: 10px;
+        width: 350px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+      }
+      .card img {
+        width: 30%;
+        border-radius: 50px;
+        margin-bottom: 5px;
+      }
+      .card h3 {
+        font-size: 1.8em;
+        color: #005bac;
+      }
+      .card p {
+        font-size: 1.1em;
+      }
+      .footer {
+        background: #005bac;
+        color: white;
+        text-align: center;
+        padding: 30px 0;
+        font-size: 1.1em;
+      }
+      .chatbot-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #ffb900;
+        color: white;
+        width: 100px;
+        height: 100px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0px 0px 15px rgba(255, 185, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s ease-in-out;
+      }
+      .chatbot-btn:hover {
+        box-shadow: 0px 0px 25px rgba(255, 185, 0, 1);
+      }
+      .chatbot-btn img {
+        width: 65px;
+        height: 65px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar-container">
+      <nav class="navbar">
+        <div class="logo">
+          <img src="..\static\SBI_New.png" alt="SBI Life Logo" />
+        </div>
+        <div>
+          <a href="/">Home</a>
+          <a href="/about">About Us</a>
+          <a href="/plans">Our Plans</a>
+          <a href="/services">Services</a>
+          <a href="/contact">Contact Us</a>
+        </div>
+      </nav>
+    </div>
+
+    <section class="hero-section">
+      <div>
+        <img
+          src="..\static\JFMWebsite.webp"
+          alt="Iraadon ka India"
+          width="1440"
+          height="423"
+        />
+        <h2 style="color: black">Your Future, Our Commitment</h2>
+        <center>
+          <p style="color: black">
+            Explore our wide range of insurance plans and secure the future of
+            your loved ones with SBI Life Insurance.
+          </p>
+        </center>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Explore Our Insurance Plans</h2>
+      <div class="card-container">
+        <div
+          class="card"
+          onclick="window.location.href='https://www.sbilife.co.in/en/online-insurance-plans/eshield-next'"
+        >
+          <img src="/static/SBI.png" alt="eShield Next" />
+          <h3>eShield Next</h3>
+          <p>A customizable online term insurance plan by SBI Life.</p>
+        </div>
+        <div
+          class="card"
+          onclick="window.location.href='https://www.sbilife.co.in/en/individual-life-insurance/ulip/smart-scholar-plus'"
+        >
+          <img src="/static/SBI.png" alt="Smart Scholar Plus" />
+          <h3>Smart Scholar Plus</h3>
+          <p>
+            A child insurance ULIP plan designed for education and future
+            planning.
+          </p>
+        </div>
+        <div
+          class="card"
+          onclick="window.location.href='https://www.sbilife.co.in/en/individual-life-insurance/ulip/retire-smart-plus'"
+        >
+          <img src="/static/SBI.png" alt="Retire Smart Plus" />
+          <h3>Retire Smart Plus</h3>
+          <p>A non-participating, unit-linked pension plan.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        &copy; 2025 SBI Life Insurance. All rights reserved. |
+        <a href="/privacy-policy" style="color: white">Privacy Policy</a> |
+        <a href="/terms" style="color: white">Terms of Service</a>
+      </p>
+    </footer>
+
+    <button class="chatbot-btn" onclick="openChatbot()">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png"
+        alt="Chatbot Icon"
+      />
+    </button>
+
+    <script>
+      function openChatbot() {
+        window.location.href = "/chatbot";
+      }
+    </script>
+  </body>
+</html>
