@@ -5,29 +5,11 @@ from django.views.decorators.csrf import csrf_exempt
 from home.setup import langgraph, llm
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from .models import ChatConversation, ChatMessage, UserProfile
-from .forms import UserProfileForm
+from .models import ChatConversation, ChatMessage 
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 import json
 
-
-@login_required
-def view_profile(request):
-    profile, created = UserProfile.objects.get_or_create(user=request.user)
-    return render(request, 'profile/view_profile.html', {'profile': profile})
-
-@login_required
-def edit_profile(request):
-    profile, created = UserProfile.objects.get_or_create(user=request.user)
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('view_profile')
-    else:
-        form = UserProfileForm(instance=profile)
-    return render(request, 'profile/edit_profile.html', {'form': form})
 
 # Function to check if question is related to SBI Life policies
 def is_sbi_life_related(question: str) -> bool:
@@ -172,6 +154,10 @@ def delete_conversation(request, conversation_id):
             return JsonResponse({"error": "Conversation not found"})
     
     return JsonResponse({"error": "Invalid request"})
+
+
+def user_profile(request):
+    return render(request, 'UserProfile.html')
 
 def index(request):
     return render(request, 'new.html')

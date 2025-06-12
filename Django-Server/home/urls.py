@@ -10,6 +10,5 @@ urlpatterns = [
     path("contacts", views.contacts, name = 'contacts'),
     path("chatbot", views.chatbot, name = 'chatbot'),
     path('chatbot_response/', views.chatbot_response, name='chatbot_response'),
-    path('profile/', views.view_profile, name='view_profile'),
-    path('profile/edit/', views.edit_profile, name='edit_profile')
+    path('user', views.user_profile, name='user_profile'),
 ]

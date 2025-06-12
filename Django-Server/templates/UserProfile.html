@@ -1,26 +1,125 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Image Test</title>
+  <meta charset="UTF-8">
+  <title>User Profile - Ravi Kumar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Testing Image Load</h1>
+<body class="bg-gray-900 text-white font-sans">
+  <div class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">User Profile</h1>
 
-    <h3>Background Image</h3>
-    <div style="
-        width: 100%;
-        height: 300px;
-        background-image: url('{% static "Smart-swadhan-desktop.jpg" %}');
-        background-size: cover;
-        background-position: center;
-        border: 1px solid black;
-    ">
+    <!-- Profile Overview -->
+    <div class="flex justify-center bg-gray-800 p-6 rounded-xl shadow-lg mb-10">
+      <div class="flex flex-col items-center">
+        <img src="..\static\Ravi.jpeg" alt="Ravi Kumar" class="w-48 h-48 rounded-full border-4 border-gray-700 object-cover mb-4" />
+        <h2 class="text-xl font-semibold">Ravi Kumar</h2>
+        <p class="text-green-400">Corporate Worker</p>
+        <p class="text-gray-400">Rohini, New Delhi</p>
+      </div>
     </div>
 
-    <h3>Profile Image</h3>
-    <img src="{% static 'Ravi.jpeg' %}" alt="Ravi" style="width: 200px; border-radius: 10px;" />
+    <!-- Personal Information -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow mb-6">
+      <h2 class="text-xl font-semibold mb-4">1. Personal Information</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <p><span class="text-gray-400">Full Name:</span> Ravi Kumar</p>
+        <p><span class="text-gray-400">Date of Birth:</span> 15 August 1985</p>
+        <p><span class="text-gray-400">Gender:</span> Male</p>
+        <p><span class="text-gray-400">Marital Status:</span> Married</p>
+        <p><span class="text-gray-400">Nationality:</span> Indian</p>
+      </div>
+    </div>
 
+    <!-- Contact Information -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow mb-6">
+      <h2 class="text-xl font-semibold mb-4">2. Contact Information</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <p><span class="text-gray-400">Email:</span> ravi.kumar@email.com</p>
+        <p><span class="text-gray-400">Mobile:</span> +91 9876543210</p>
+        <p><span class="text-gray-400">Alternate Phone:</span> +91 9123456780</p>
+        <p><span class="text-gray-400">Street:</span> D-45, Sector 7</p>
+        <p><span class="text-gray-400">City:</span> New Delhi</p>
+        <p><span class="text-gray-400">State:</span> Delhi</p>
+        <p><span class="text-gray-400">PIN:</span> 110085</p>
+        <p><span class="text-gray-400">Communication Preference:</span> Email, SMS</p>
+      </div>
+    </div>
+
+    <!-- Policy Information -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow mb-6">
+      <h2 class="text-xl font-semibold mb-4">3. Policy Information</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <p><span class="text-gray-400">Policy Number:</span> LIC123456789</p>
+        <p><span class="text-gray-400">Plan Name:</span> Jeevan Anand</p>
+        <p><span class="text-gray-400">Start Date:</span> 01 Jan 2020</p>
+        <p><span class="text-gray-400">Maturity Date:</span> 01 Jan 2040</p>
+        <p><span class="text-gray-400">Sum Assured:</span> ₹15,00,000</p>
+        <p><span class="text-gray-400">Premium:</span> ₹20,000/year</p>
+        <p><span class="text-gray-400">Nominee:</span> Priya Kumar (Wife)</p>
+        <p><span class="text-gray-400">Policy Status:</span> Active</p>
+        <p><span class="text-gray-400">Riders:</span> Accidental Death Benefit</p>
+      </div>
+    </div>
+
+    <!-- Premium Payment Details -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow mb-6">
+      <h2 class="text-xl font-semibold mb-4">4. Premium Payment Details</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <p><span class="text-gray-400">Payment History:</span> Paid till Jan 2025</p>
+        <p><span class="text-gray-400">Next Due Date:</span> 01 Jan 2026</p>
+        <p><span class="text-gray-400">Auto-debit:</span> Enabled</p>
+        <p><span class="text-gray-400">Payment Mode:</span> Netbanking</p>
+        <p><span class="text-gray-400">Tax Benefits:</span> Availed under Section 80C</p>
+      </div>
+    </div>
+
+    <!-- Claims Information -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow mb-6">
+      <h2 class="text-xl font-semibold mb-4">5. Claims Information</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <p><span class="text-gray-400">Past Claims:</span> 1 (Medical)</p>
+        <p><span class="text-gray-400">Claim Status:</span> Approved</p>
+        <p><span class="text-gray-400">Documents Submitted:</span> Medical Reports, Hospital Bills</p>
+        <p><span class="text-gray-400">Claim Amount:</span> ₹25,000</p>
+      </div>
+    </div>
+    <!-- User Tags -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow-lg mt-10">
+      <h2 class="text-xl font-semibold mb-4">6. User Tags</h2>
+      <div id="tags-container" class="flex flex-wrap gap-3 text-sm text-white">
+        <!-- Tags will be dynamically inserted here -->
+      </div>
+    </div>
+
+    <script>
+      const timestamp = new Date().getTime();
+      fetch('/static/previous_tags.json')
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById('tags-container');
+
+          // Convert object to array and sort by weight descending
+          const sortedTags = Object.entries(data)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 10); // Top 10
+          
+          console.log("Top 10 Tags:", sortedTags);
+
+          // Create and append badge elements
+          sortedTags.forEach(([tag, weight]) => {
+            const tagElement = document.createElement('span');
+            tagElement.textContent = tag;
+            tagElement.className = "inline-block bg-indigo-500 text-white text-sm px-3 py-1 rounded-full shadow-md hover:bg-indigo-600 transition";
+            container.appendChild(tagElement);
+          });
+        })
+        .catch(error => {
+          console.error('Error loading tags:', error);
+        });
+    </script>
+
+
+  </div>
 </body>
 </html>
